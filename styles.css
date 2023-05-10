@@ -1,0 +1,259 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
+    height: 100vh;
+    font-size: 3vh;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.calc-body {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(117, 79, 30);
+    height: 60vh;
+    width: 45vh;
+    border: .4vh solid black;
+    border-radius: 1vh;
+}
+
+.calc-display {
+    display: flex;
+    background-color: rgb(255, 249, 218);
+    height: 10vh;
+    width: 44vh;    
+    border: .25vh solid black;
+    border-radius: 1vh;
+    justify-content: right;
+    align-items: center;
+    font-size: 7.5vh;
+}
+
+.calc-buttons {
+    display: flex;
+    flex-flow: column;
+    background-color: rgb(58, 58, 58);
+    height: 48vh;
+    width: 44vh;
+    border: .25vh solid black;
+    border-radius: 1vh;
+}
+
+.row {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#clear-btn {
+    display: flex;
+    background-color: rgb(218, 79, 211);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#sign-btn {
+    display: flex;
+    background-color: rgb(218, 79, 211);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#percent-btn {
+    display: flex;
+    background-color: rgb(218, 79, 211);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#divide-btn {
+    display: flex;
+    background-color: rgb(143, 141, 42);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#seven-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#eight-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#nine-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#multipy-btn {
+    display: flex;
+    background-color: rgb(143, 141, 42);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#four-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#five-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#six-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#minus-btn {
+    display: flex;
+    background-color: rgb(143, 141, 42);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#one-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#two-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#three-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#plus-btn {
+    display: flex;
+    background-color: rgb(143, 141, 42);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#decimal-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#equals-btn {
+    display: flex;
+    background-color: rgb(143, 141, 42);
+    height: 8vh;
+    width: 8vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#zero-btn {
+    display: flex;
+    background-color: rgb(31, 255, 57);
+    height: 8vh;
+    width: 18vh;
+    border: .5vh solid white;
+    border-radius: 5vh;
+    justify-content: center;
+    align-items: center;
+}
