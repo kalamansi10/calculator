@@ -3,6 +3,7 @@ calcDisplay.textContent = '0'
 let decimalOn = false
 let decimalBypass = false
 let operator = 'inactive'
+let contOperate = false
 let firstVar = 0
 let secondVar = 0
 let newNum = 0
@@ -11,16 +12,17 @@ let solution = 0
 const numBtn = document.querySelectorAll('.num-btn');
 numBtn.forEach((numPress) => {
     numPress.addEventListener('click', function (e) {
-    if (decimalBypass == true) {
-        decimalBypass == false
-    } else if (decimalBypass == false) {
-        calcDisplay.textContent = newNum.toString();
-    }
-    let num = calcDisplay.textContent + numPress.textContent;
-    let noZeroNum = removeLeadingZeros(num);
-    newNum = Number(noZeroNum)
-    calcDisplay.textContent = newNum.toString();   
-  });
+        if (newNum.toString().length < 9) {
+            if (decimalBypass != true) {
+                calcDisplay.textContent = newNum.toString();
+            }
+            decimalBypass = false;
+            let num = calcDisplay.textContent + numPress.textContent;
+            let noZeroNum = removeLeadingZeros(num);
+            newNum = Number(noZeroNum);
+            calcDisplay.textContent = newNum.toString();  
+        };
+    });
 });
 
 const clrBtn = document.querySelector('#clear-btn');
@@ -51,48 +53,112 @@ percentBtn.onclick = () => {
 const decimalBtn = document.querySelector('#decimal-btn');
 decimalBtn.onclick = () => {
     if (decimalOn != true) {
-        calcDisplay.textContent = calcDisplay.textContent + '.'
-        decimalOn = true
-        decimalBypass = true
+        calcDisplay.textContent = calcDisplay.textContent + '.';
+        decimalOn = true;
+        decimalBypass = true;
     }
 };
 
 const plusBtn = document.querySelector('#plus-btn');
 plusBtn.onclick = () => {
-    operator = 'addition'
+    contOperate = false
     memoryFunc()
+    if (firstVar != 0 && secondVar != 0) {
+        operate();
+        firstVar = newNum;
+        secondVar = 0;
+        newNum = 0;
+    };
+    operator = 'addition'
+};
+
+const minusBtn = document.querySelector('#minus-btn');
+minusBtn.onclick = () => {
+    contOperate = false
+    memoryFunc()
+    if (firstVar != 0 && secondVar != 0) {
+        operate();
+        firstVar = newNum;
+        secondVar = 0;
+        newNum = 0;
+    };
+    operator = 'subtraction'
+};
+
+const multipyBtn = document.querySelector('#multipy-btn');
+multipyBtn.onclick = () => {
+    contOperate = false
+    memoryFunc()
+    if (firstVar != 0 && secondVar != 0) {
+        operate();
+        firstVar = newNum;
+        secondVar = 0;
+        newNum = 0;
+    };
+    operator = 'multiplication'
+};
+
+const divideBtn = document.querySelector('#divide-btn');
+divideBtn.onclick = () => {
+    contOperate = false
+    memoryFunc()
+    if (firstVar != 0 && secondVar != 0) {
+        operate();
+        firstVar = newNum;
+        secondVar = 0;
+        newNum = 0;
+    };
+    operator = 'division'
 };
 
 const equalsBtn = document.querySelector('#equals-btn');
-equalsBtn.onclick = () => memoryFunc();
+equalsBtn.onclick = () => {
+    if (operator != 'inactive'){
+        memoryFunc()
+        operate();
+    };
+};
 
 function memoryFunc() {
     if (firstVar == 0) {
         firstVar = newNum;
-        newNum = 0
+        newNum = 0;
     } else if (firstVar != 0 && secondVar == 0) {
         secondVar = newNum;
-        newNum = 0
-        operate()
-    } else if (firstVar != 0 && secondVar != 0) {
+        newNum = 0;
+    } else if (firstVar != 0 && secondVar != 0 && contOperate == false) {
         firstVar = newNum;
-        operate()
+        secondVar = 0;
+        newNum = 0;
+    } else if (firstVar != 0 && secondVar != 0 && contOperate == true) {
+        firstVar = newNum;
+        newNum = 0
     }
 }
 
 function operate() {
-    if (operator = 'addition') {
+    if (operator == 'addition') {
         solution = firstVar + secondVar
-    } else if (operator = 'subtraction') {
+    } else if (operator == 'subtraction') {
         solution = firstVar - secondVar
-    } else if (operator = 'multiplication') {
+    } else if (operator == 'multiplication') {
         solution = firstVar * secondVar
-    } else if (operator = 'division') {
+    } else if (operator == 'division') {
         solution = firstVar / secondVar
     }
-    newNum = solution
-    calcDisplay.textContent = newNum.toString();
-}
+    printSolution()
+    
+};
+
+function printSolution() {
+    if (solution > 999999999) {
+        calcDisplay.textContent = 'NaN'
+    } else {
+        contOperate = true
+        newNum = solution.toFixed(4) * 1;
+        calcDisplay.textContent = newNum.toString();
+    }  
+};
 
 
 
