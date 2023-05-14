@@ -38,10 +38,12 @@ clrBtn.onclick = () => {
 
 const signBtn = document.querySelector('#sign-btn');
 signBtn.onclick = () => {
-    let num = Number(calcDisplay.textContent);
-    newNum = num * -1;
-    calcDisplay.textContent = newNum.toString();
-}
+    if (newNum != 0) {
+        let num = Number(calcDisplay.textContent);
+        newNum = num * -1;
+        calcDisplay.textContent = newNum.toString();
+    };
+};
 
 const percentBtn = document.querySelector('#percent-btn');
 percentBtn.onclick = () => {
@@ -141,9 +143,11 @@ window.addEventListener('keydown', function (e) {
         calcDisplay.textContent = newNum.toString();
     } else if (keyPress == "Tab") {
         e.preventDefault();
-        let num = Number(calcDisplay.textContent);
-        newNum = num * -1;
-        calcDisplay.textContent = newNum.toString();
+        if (newNum != 0) {
+            let num = Number(calcDisplay.textContent);
+            newNum = num * -1;
+            calcDisplay.textContent = newNum.toString();
+        };
     } else if (keyPress == "=" || keyPress == "Enter") {
         if (operator != 'inactive'){
             memoryFunc();
