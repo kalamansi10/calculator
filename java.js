@@ -18,8 +18,8 @@ numBtn.forEach((numPress) => {
             }
             decimalBypass = false;
             let num = calcDisplay.textContent + numPress.textContent;
-            let noZeroNum = removeLeadingZeros(num);
-            newNum = Number(noZeroNum);
+            let noZeroNum = Number(num) * 1;
+            newNum = noZeroNum;
             calcDisplay.textContent = newNum.toString();  
         };
     });
@@ -27,32 +27,33 @@ numBtn.forEach((numPress) => {
 
 const clrBtn = document.querySelector('#clear-btn');
 clrBtn.onclick = () => {
-    calcDisplay.textContent = '0'
-    decimalOn = false
-    operator = 'inactive'
-    firstVar = 0
-    secondVar = 0
-    newNum = 0
-    solution = 0
+    calcDisplay.textContent = '0';
+    decimalOn = false;
+    operator = 'inactive';
+    firstVar = 0;
+    secondVar = 0;
+    newNum = 0;
+    solution = 0;
 };
 
 const signBtn = document.querySelector('#sign-btn');
 signBtn.onclick = () => {
-    let num = Number(calcDisplay.textContent)
-    newNum = num * -1
+    let num = Number(calcDisplay.textContent);
+    newNum = num * -1;
     calcDisplay.textContent = newNum.toString();
 }
 
 const percentBtn = document.querySelector('#percent-btn');
 percentBtn.onclick = () => {
     let num = Number(calcDisplay.textContent)
-    newNum = num / 100
+    newNum = num / 100;
+    newNum = newNum.toFixed(4) * 1;
     calcDisplay.textContent = newNum.toString();
 }
 
 const decimalBtn = document.querySelector('#decimal-btn');
 decimalBtn.onclick = () => {
-    if (decimalOn != true) {
+    if (decimalOn != true && newNum.toString().length < 9) {
         calcDisplay.textContent = calcDisplay.textContent + '.';
         decimalOn = true;
         decimalBypass = true;
@@ -61,63 +62,98 @@ decimalBtn.onclick = () => {
 
 const plusBtn = document.querySelector('#plus-btn');
 plusBtn.onclick = () => {
-    contOperate = false
-    memoryFunc()
-    if (firstVar != 0 && secondVar != 0) {
-        operate();
-        firstVar = newNum;
-        secondVar = 0;
-        newNum = 0;
-    };
-    operator = 'addition'
+    operatorVal();
+    operator = 'addition';
 };
 
 const minusBtn = document.querySelector('#minus-btn');
 minusBtn.onclick = () => {
-    contOperate = false
-    memoryFunc()
-    if (firstVar != 0 && secondVar != 0) {
-        operate();
-        firstVar = newNum;
-        secondVar = 0;
-        newNum = 0;
-    };
-    operator = 'subtraction'
+    operatorVal();
+    operator = 'subtraction';
 };
 
 const multipyBtn = document.querySelector('#multipy-btn');
 multipyBtn.onclick = () => {
-    contOperate = false
-    memoryFunc()
-    if (firstVar != 0 && secondVar != 0) {
-        operate();
-        firstVar = newNum;
-        secondVar = 0;
-        newNum = 0;
-    };
-    operator = 'multiplication'
+    operatorVal();
+    operator = 'multiplication';
 };
 
 const divideBtn = document.querySelector('#divide-btn');
 divideBtn.onclick = () => {
-    contOperate = false
-    memoryFunc()
-    if (firstVar != 0 && secondVar != 0) {
-        operate();
-        firstVar = newNum;
-        secondVar = 0;
-        newNum = 0;
-    };
-    operator = 'division'
+    operatorVal();
+    operator = 'division';
 };
 
 const equalsBtn = document.querySelector('#equals-btn');
 equalsBtn.onclick = () => {
     if (operator != 'inactive'){
-        memoryFunc()
+        memoryFunc();
         operate();
     };
 };
+
+// KEYBOARD SUPPORT
+
+window.addEventListener('keydown', function (e) {
+    const keyPress = e.key
+    if (onlyNumbers(keyPress) == false) {
+        if (newNum.toString().length < 9) {
+            if (decimalBypass != true) {
+                calcDisplay.textContent = newNum.toString();
+            }
+            decimalBypass = false;
+            let num = calcDisplay.textContent + keyPress;
+            let noZeroNum = Number(num) * 1;
+            newNum = noZeroNum;
+            calcDisplay.textContent = newNum.toString();  
+        };
+    } else if (keyPress == "+") {
+        operatorVal();
+        operator = 'addition'
+    } else if (keyPress == "-") {
+        operatorVal();
+        operator = 'subtraction'
+    } else if (keyPress == "*") {
+        operatorVal();
+        operator = 'multiplication'
+    } else if (keyPress == "/") {
+        operatorVal();
+        operator = 'division'
+    } else if (keyPress == ".") {
+        if (decimalOn != true && newNum.toString().length < 9) {
+            calcDisplay.textContent = calcDisplay.textContent + '.';
+            decimalOn = true;
+            decimalBypass = true;
+        }
+    } else if (keyPress == "Backspace" || keyPress == "Escape") {
+        e.preventDefault();
+        calcDisplay.textContent = '0';
+        decimalOn = false;
+        operator = 'inactive';
+        firstVar = 0;
+        secondVar = 0;
+        newNum = 0;
+        solution = 0;
+    } else if (keyPress == "%") {
+        let num = Number(calcDisplay.textContent)
+        newNum = num / 100;
+        newNum = newNum.toFixed(4) * 1;
+        calcDisplay.textContent = newNum.toString();
+    } else if (keyPress == "Tab") {
+        e.preventDefault();
+        let num = Number(calcDisplay.textContent);
+        newNum = num * -1;
+        calcDisplay.textContent = newNum.toString();
+    } else if (keyPress == "=" || keyPress == "Enter") {
+        if (operator != 'inactive'){
+            memoryFunc();
+            operate();
+        };
+    };
+});
+
+
+// FUNCTIONS
 
 function memoryFunc() {
     if (firstVar == 0) {
@@ -132,21 +168,32 @@ function memoryFunc() {
         newNum = 0;
     } else if (firstVar != 0 && secondVar != 0 && contOperate == true) {
         firstVar = newNum;
-        newNum = 0
-    }
-}
+        newNum = 0;
+    };
+};
+
+function operatorVal() {
+    contOperate = false
+    memoryFunc()
+    if (firstVar != 0 && secondVar != 0) {
+        operate();
+        firstVar = newNum;
+        secondVar = 0;
+        newNum = 0;
+    };
+};
 
 function operate() {
     if (operator == 'addition') {
-        solution = firstVar + secondVar
+        solution = firstVar + secondVar;
     } else if (operator == 'subtraction') {
-        solution = firstVar - secondVar
+        solution = firstVar - secondVar;
     } else if (operator == 'multiplication') {
-        solution = firstVar * secondVar
+        solution = firstVar * secondVar;
     } else if (operator == 'division') {
-        solution = firstVar / secondVar
+        solution = firstVar / secondVar;
     }
-    printSolution()
+    printSolution();
     
 };
 
@@ -154,20 +201,12 @@ function printSolution() {
     if (solution > 999999999) {
         calcDisplay.textContent = 'NaN'
     } else {
-        contOperate = true
+        contOperate = true;
         newNum = solution.toFixed(4) * 1;
         calcDisplay.textContent = newNum.toString();
     }  
 };
 
-
-
-function removeLeadingZeros(num) {
-    for (var i = 0; i < num.length; i++) {
-        if (num.charAt(i) != '0') {
-            let res = num.substr(i);
-            return res;
-        }
-    }
-    return "0";
+function onlyNumbers(str) {
+    return /[^0-9]/g.test(str);
 }
